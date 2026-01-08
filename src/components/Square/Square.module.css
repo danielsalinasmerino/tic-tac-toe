@@ -1,0 +1,30 @@
+.square {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  background-color: #fff;
+  border: none;
+  font-size: 2.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.square:hover:not(.filled) {
+  background-color: #f0f0f0;
+}
+
+.square:focus {
+  outline: 2px solid #646cff;
+  outline-offset: -2px;
+}
+
+.filled {
+  cursor: default;
+}
