@@ -1,4 +1,5 @@
 import type { CellValue } from "../../types";
+import { TEXT } from "../../constants/text";
 
 interface SquareProps {
   value: CellValue;
@@ -6,7 +7,12 @@ interface SquareProps {
 }
 
 function Square({ value, onClick }: SquareProps) {
-  const ariaLabel = value ? `Square filled with ${value}` : "Empty square";
+  const ariaLabel = value
+    ? value === "X"
+      ? TEXT.SQUARE_FILLED_X
+      : TEXT.SQUARE_FILLED_O
+    : TEXT.EMPTY_SQUARE;
+
   const className = `square ${value ? "filled" : ""}`;
 
   return (

@@ -8,6 +8,7 @@ import {
 } from "../../utils";
 import { GameResult } from "../../types/GameResult";
 import type { CellValue } from "../../types/CellValue";
+import { TEXT } from "../../constants/text";
 
 function Board() {
   const [squares, setSquares] = useState<CellValue[]>(Array(9).fill(null));
@@ -43,11 +44,15 @@ function Board() {
     return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
 
+  const status = gameOver
+    ? resultMessage
+    : isXNext
+      ? TEXT.NEXT_PLAYER_X
+      : TEXT.NEXT_PLAYER_O;
+
   return (
     <div className={styles.container}>
-      <div className={styles.status}>
-        {gameOver ? resultMessage : `Next player: ${isXNext ? "X" : "O"}`}
-      </div>
+      <div className={styles.status}>{status}</div>
       <div className={styles.board}>
         <div className={styles.boardRow}>
           {renderSquare(0)}
@@ -67,7 +72,7 @@ function Board() {
       </div>
       {gameOver && (
         <button className={styles.resetButton} onClick={handleReset}>
-          Play Again
+          {TEXT.PLAY_AGAIN}
         </button>
       )}
     </div>

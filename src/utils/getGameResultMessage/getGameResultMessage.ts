@@ -1,5 +1,6 @@
 import type { GameResult } from "../../types/GameResult";
 import { GameResult as GameResultValues } from "../../types/GameResult";
+import { TEXT } from "../../constants/text";
 
 /**
  * Gets a human-readable message for the game result
@@ -9,11 +10,11 @@ import { GameResult as GameResultValues } from "../../types/GameResult";
 export function getGameResultMessage(result: GameResult): string {
   switch (result) {
     case GameResultValues.XWon:
-      return "Winner: X";
+      return TEXT.WINNER_X;
     case GameResultValues.OWon:
-      return "Winner: O";
+      return TEXT.WINNER_O;
     case GameResultValues.Draw:
-      return "Game Over: Draw";
+      return TEXT.GAME_DRAW;
     case GameResultValues.NotFinished:
       return "";
     default:

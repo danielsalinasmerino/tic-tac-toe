@@ -1,21 +1,22 @@
 import { describe, it, expect } from "vitest";
 import { getGameResultMessage } from "./getGameResultMessage";
 import { GameResult } from "../../types/GameResult";
+import { TEXT } from "../../constants/text";
 
 describe("getGameResultMessage", () => {
   it("should return 'Winner: X' when X wins", () => {
     const result = getGameResultMessage(GameResult.XWon);
-    expect(result).toBe("Winner: X");
+    expect(result).toBe(TEXT.WINNER_X);
   });
 
   it("should return 'Winner: O' when O wins", () => {
     const result = getGameResultMessage(GameResult.OWon);
-    expect(result).toBe("Winner: O");
+    expect(result).toBe(TEXT.WINNER_O);
   });
 
   it("should return 'Game Over: Draw' when the game is a draw", () => {
     const result = getGameResultMessage(GameResult.Draw);
-    expect(result).toBe("Game Over: Draw");
+    expect(result).toBe(TEXT.GAME_DRAW);
   });
 
   it("should return empty string when the game is not finished", () => {
