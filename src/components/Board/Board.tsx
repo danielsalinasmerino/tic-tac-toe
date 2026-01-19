@@ -5,7 +5,7 @@ import {
   checkGameResult,
   convertToBoard,
   getGameResultMessage,
-} from "../../utils/gameLogic";
+} from "../../utils";
 import { GameResult } from "../../types/GameResult";
 import type { CellValue } from "../../types/CellValue";
 
