@@ -9,6 +9,7 @@ import {
 import { GameResult } from "../../types/GameResult";
 import type { CellValue } from "../../types/CellValue";
 import { TEXT } from "../../constants/text";
+import { useWinnerConfetti } from "../../hooks/useWinnerConfetti";
 
 function Board() {
   const [squares, setSquares] = useState<CellValue[]>(Array(9).fill(null));
@@ -22,6 +23,9 @@ function Board() {
 
   const gameOver = gameResult !== GameResult.NotFinished;
   const resultMessage = getGameResultMessage(gameResult);
+
+  // Trigger confetti when someone wins
+  useWinnerConfetti(gameResult);
 
   const handleClick = (index: number) => {
     // Don't allow clicking if square is already filled or game is over
@@ -44,7 +48,7 @@ function Board() {
     return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
 
-  const status = gameOver
+  const statusMessage = gameOver
     ? resultMessage
     : isXNext
       ? TEXT.NEXT_PLAYER_X
@@ -52,7 +56,7 @@ function Board() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.status}>{status}</div>
+      <div className={styles.status}>{statusMessage}</div>
       <div className={styles.board}>
         <div className={styles.boardRow}>
           {renderSquare(0)}
