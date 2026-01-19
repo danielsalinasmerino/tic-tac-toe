@@ -5,9 +5,9 @@ import {
   checkGameResult,
   convertToBoard,
   getGameResultMessage,
-  GameResult,
-  type CellValue,
 } from "../../utils/gameLogic";
+import { GameResult } from "../../types/GameResult";
+import type { CellValue } from "../../types/CellValue";
 
 function Board() {
   const [squares, setSquares] = useState<CellValue[]>(Array(9).fill(null));

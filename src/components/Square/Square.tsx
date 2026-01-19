@@ -1,4 +1,4 @@
-import type { CellValue } from "../../utils/gameLogic";
+import type { CellValue } from "../../types";
 
 interface SquareProps {
   value: CellValue;

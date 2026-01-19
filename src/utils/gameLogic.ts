@@ -1,28 +1,7 @@
-/**
- * Represents the possible results of a tic-tac-toe game
- */
-export const GameResult = {
-  NotFinished: -1,
-  Draw: 0,
-  XWon: 1,
-  OWon: 2,
-} as const;
-
-export type GameResult = (typeof GameResult)[keyof typeof GameResult];
-
-/**
- * Type representing a cell value in the game board
- */
-export type CellValue = "X" | "O" | null;
-
-/**
- * Type representing the game board as a 3x3 grid
- */
-export type Board = [
-  [CellValue, CellValue, CellValue],
-  [CellValue, CellValue, CellValue],
-  [CellValue, CellValue, CellValue],
-];
+import type { Board } from "../types/Board";
+import type { CellValue } from "../types/CellValue";
+import type { GameResult } from "../types/GameResult";
+import { GameResult as GameResultValues } from "../types/GameResult";
 
 /**
  * Converts a flat array of squares to a 3x3 board grid
@@ -45,15 +24,15 @@ export function convertToBoard(squares: CellValue[]): Board {
 export function checkGameResult(board: Board): GameResult {
   // Check rows
   for (const row of board) {
-    if (row.every((cell) => cell === "X")) return GameResult.XWon;
-    if (row.every((cell) => cell === "O")) return GameResult.OWon;
+    if (row.every((cell) => cell === "X")) return GameResultValues.XWon;
+    if (row.every((cell) => cell === "O")) return GameResultValues.OWon;
   }
 
   // Check columns
   for (let col = 0; col < board.length; col++) {
     const column: CellValue[] = [board[0][col], board[1][col], board[2][col]];
-    if (column.every((cell) => cell === "X")) return GameResult.XWon;
-    if (column.every((cell) => cell === "O")) return GameResult.OWon;
+    if (column.every((cell) => cell === "X")) return GameResultValues.XWon;
+    if (column.every((cell) => cell === "O")) return GameResultValues.OWon;
   }
 
   // Check diagonals
@@ -62,15 +41,16 @@ export function checkGameResult(board: Board): GameResult {
     [board[0][2], board[1][1], board[2][0]],
   ];
   for (const diagonal of diagonals) {
-    if (diagonal.every((cell) => cell === "X")) return GameResult.XWon;
-    if (diagonal.every((cell) => cell === "O")) return GameResult.OWon;
+    if (diagonal.every((cell) => cell === "X")) return GameResultValues.XWon;
+    if (diagonal.every((cell) => cell === "O")) return GameResultValues.OWon;
   }
 
   // Check if game is still in progress (any empty cells)
-  if (board.some((row) => row.includes(null))) return GameResult.NotFinished;
+  if (board.some((row) => row.includes(null)))
+    return GameResultValues.NotFinished;
 
   // All cells filled with no winner = draw
-  return GameResult.Draw;
+  return GameResultValues.Draw;
 }
 
 /**
@@ -80,13 +60,13 @@ export function checkGameResult(board: Board): GameResult {
  */
 export function getGameResultMessage(result: GameResult): string {
   switch (result) {
-    case GameResult.XWon:
+    case GameResultValues.XWon:
       return "Winner: X";
-    case GameResult.OWon:
+    case GameResultValues.OWon:
       return "Winner: O";
-    case GameResult.Draw:
+    case GameResultValues.Draw:
       return "Game Over: Draw";
-    case GameResult.NotFinished:
+    case GameResultValues.NotFinished:
       return "";
     default:
       return "";
