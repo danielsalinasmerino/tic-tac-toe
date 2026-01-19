@@ -1,14 +1,11 @@
 import { useState, useMemo } from "react";
 import Square from "../Square/Square";
+import GameStatus from "../GameStatus/GameStatus";
+import PlayAgainButton from "../PlayAgainButton/PlayAgainButton";
 import styles from "./Board.module.css";
-import {
-  checkGameResult,
-  convertToBoard,
-  getGameResultMessage,
-} from "../../utils";
+import { checkGameResult, convertToBoard } from "../../utils";
 import { GameResult } from "../../types/GameResult";
 import type { CellValue } from "../../types/CellValue";
-import { TEXT } from "../../constants/text";
 import { useWinnerConfetti } from "../../hooks/useWinnerConfetti";
 
 function Board() {
@@ -22,7 +19,6 @@ function Board() {
   }, [squares]);
 
   const gameOver = gameResult !== GameResult.NotFinished;
-  const resultMessage = getGameResultMessage(gameResult);
 
   // Trigger confetti when someone wins
   useWinnerConfetti(gameResult);
@@ -48,15 +44,9 @@ function Board() {
     return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
 
-  const statusMessage = gameOver
-    ? resultMessage
-    : isXNext
-      ? TEXT.NEXT_PLAYER_X
-      : TEXT.NEXT_PLAYER_O;
-
   return (
     <div className={styles.container}>
-      <div className={styles.status}>{statusMessage}</div>
+      <GameStatus gameResult={gameResult} isXNext={isXNext} />
       <div className={styles.board}>
         <div className={styles.boardRow}>
           {renderSquare(0)}
@@ -74,11 +64,7 @@ function Board() {
           {renderSquare(8)}
         </div>
       </div>
-      {gameOver && (
-        <button className={styles.resetButton} onClick={handleReset}>
-          {TEXT.PLAY_AGAIN}
-        </button>
-      )}
+      {gameOver && <PlayAgainButton onClick={handleReset} />}
     </div>
   );
 }
