@@ -1,15 +1,16 @@
+import type { CellValue } from "../../utils/gameLogic";
+
 interface SquareProps {
-  value: "X" | "O" | null;
+  value: CellValue;
   onClick: () => void;
 }
 
 function Square({ value, onClick }: SquareProps) {
+  const ariaLabel = value ? `Square filled with ${value}` : "Empty square";
+  const className = `square ${value ? "filled" : ""}`;
+
   return (
-    <button
-      className={`square ${value ? "filled" : ""}`}
-      onClick={onClick}
-      aria-label={value ? `Square filled with ${value}` : "Empty square"}
-    >
+    <button className={className} onClick={onClick} aria-label={ariaLabel}>
       {value}
     </button>
   );
