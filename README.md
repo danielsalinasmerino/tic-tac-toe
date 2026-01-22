@@ -2,6 +2,12 @@
 
 A modern, fully-tested Tic-Tac-Toe game built with React, TypeScript, and Vite. Features a clean component architecture, comprehensive test coverage, and a delightful confetti celebration when someone wins!
 
+## 🎮 Play Online
+
+**[Play the game here →](https://danielsalinasmerino.github.io/tic-tac-toe/)**
+
+The game is automatically deployed to GitHub Pages on every push to the main branch.
+
 ## Features
 
 - 🎮 **Classic Tic-Tac-Toe Gameplay** - Two players take turns placing X's and O's
@@ -100,6 +106,37 @@ Preview the production build:
 ```bash
 npm run preview
 ```
+
+## Deployment
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
+
+### Live Site
+
+The game is deployed at: **https://danielsalinasmerino.github.io/tic-tac-toe/**
+
+### Automatic Deployment
+
+Every push to the `main` branch triggers an automatic deployment:
+
+1. GitHub Actions workflow builds the project
+2. Tests run to ensure code quality
+3. Built files are deployed to GitHub Pages
+4. Site updates within minutes
+
+### Manual Deployment
+
+You can also deploy manually using:
+
+```bash
+npm run deploy
+```
+
+### Deployment Configuration
+
+- **Workflow**: [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+- **Base URL**: Configured in [vite.config.ts](vite.config.ts) as `/tic-tac-toe/`
+- **Build Output**: `dist/` directory
 
 ## Game Logic
 
